@@ -4,6 +4,7 @@ import com.example.marketingapplication.common.ApplicationContextProvider;
 import com.example.marketingapplication.common.CustomException;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.util.CollectionUtils;
 
 public class CampaignListener {
@@ -13,6 +14,15 @@ public class CampaignListener {
         CampaignDTO campaignDTO = ApplicationContextProvider.getBean(CampaignMapper.class).map(campaign);
         mandatoryFieldsMustBePresent(campaignDTO);
         nameMustBeUnique(campaignDTO);
+        subscriberEmailsMustBeValid(campaignDTO);
+    }
+
+    private void subscriberEmailsMustBeValid(CampaignDTO campaignDTO) {
+        for(String email: campaignDTO.getSubscribers()){
+            if(!EmailValidator.getInstance().isValid(email)){
+                throw new CustomException("Invalid subscriber email: " + email);
+            }
+        }
     }
 
     private void nameMustBeUnique(CampaignDTO campaignDTO) {
@@ -40,9 +50,10 @@ public class CampaignListener {
     }
 
     @PreUpdate
-    private void postUpdate(Campaign campaign) {
+    private void preUpdate(Campaign campaign) {
         CampaignDTO campaignDTO = ApplicationContextProvider.getBean(CampaignMapper.class).map(campaign);
         mandatoryFieldsMustBePresent(campaignDTO);
         nameMustBeUnique(campaignDTO);
+        subscriberEmailsMustBeValid(campaignDTO);
     }
 }

@@ -13,4 +13,6 @@ public interface ICampaignService {
     CampaignDTO getById(Long id);
 
     long countByName(String name);
+
+    void deleteById(Long id);
 }

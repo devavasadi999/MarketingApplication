@@ -43,6 +43,7 @@ public class CampaignService implements ICampaignService {
     }
 
     @Override
+    @Transactional
     public CampaignDTO getById(Long id) {
         return campaignMapper.map(campaignRepository.findById(id).orElse(null));
     }
@@ -88,6 +89,11 @@ public class CampaignService implements ICampaignService {
     private void updateStatus(CampaignDTO campaignDTO, CampaignStatusEnum newStatus) {
         campaignDTO.setStatus(newStatus);
         campaignRepository.save(campaignMapper.map(campaignDTO));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        campaignRepository.deleteById(id);
     }
 
     @Override

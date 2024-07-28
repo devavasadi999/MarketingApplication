@@ -1,5 +1,9 @@
-package com.example.marketingapplication.campaign;
+package com.example.marketingapplication.campaign.MockAPITests;
 
+import com.example.marketingapplication.campaign.Campaign;
+import com.example.marketingapplication.campaign.CampaignDTO;
+import com.example.marketingapplication.campaign.CampaignRepository;
+import com.example.marketingapplication.campaign.CampaignStatusEnum;
 import com.example.marketingapplication.client.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

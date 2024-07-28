@@ -1,5 +1,8 @@
-package com.example.marketingapplication.campaign;
+package com.example.marketingapplication.campaign.MockAPITests;
 
+import com.example.marketingapplication.campaign.Campaign;
+import com.example.marketingapplication.campaign.CampaignRepository;
+import com.example.marketingapplication.campaign.CampaignStatusEnum;
 import com.example.marketingapplication.client.Client;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
