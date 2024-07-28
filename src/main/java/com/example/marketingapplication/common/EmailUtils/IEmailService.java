@@ -1,4 +1,4 @@
-package com.example.marketingapplication.common.EmailUtils;
+package com.example.marketingapplication.common.emailutils;
 
 import java.util.Map;
 

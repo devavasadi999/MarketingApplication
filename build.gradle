@@ -37,6 +37,11 @@ dependencies {
 	implementation 'commons-validator:commons-validator:1.7'
 }
 
+dependencies {
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.hamcrest:hamcrest:2.2'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

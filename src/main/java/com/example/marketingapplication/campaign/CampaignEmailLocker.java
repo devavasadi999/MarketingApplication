@@ -1,9 +1,10 @@
 package com.example.marketingapplication.campaign;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class CampaignEmailLocker {
-    private static Set<Long> campaignIds;
+    private static Set<Long> campaignIds = new HashSet<>();
 
     public static void acquireLock(Long campaignId){
         if(campaignIds.contains(campaignId)){

@@ -1,11 +1,10 @@
 package com.example.marketingapplication.campaign;
 
 import com.example.marketingapplication.common.CustomException;
-import com.example.marketingapplication.common.EmailUtils.EmailDTO;
-import com.example.marketingapplication.common.EmailUtils.IEmailService;
+import com.example.marketingapplication.common.emailutils.EmailDTO;
+import com.example.marketingapplication.common.emailutils.IEmailService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +49,9 @@ public class CampaignService implements ICampaignService {
 
     @Override
     public Map<String, String> sendEmail(Long campaignId) {
+        if(campaignId == null){
+            throw new CustomException("Invalid Request");
+        }
         CampaignDTO campaignDTO = campaignMapper.map(campaignRepository.findById(campaignId).orElse(null));
         if(campaignDTO == null){
             throw new CustomException("Invalid campaign.");
@@ -70,7 +72,7 @@ public class CampaignService implements ICampaignService {
         } catch(CampaignEmailTriggerException e){
             throw e;
         } catch(Throwable t){
-            updateStatus(campaignDTO, CampaignStatusEnum.FAILED);
+            updateStatus(campaignDTO, CampaignStatusEnum.DRAFT);
             throw t;
         } finally {
             CampaignEmailLocker.releaseLock(campaignId);

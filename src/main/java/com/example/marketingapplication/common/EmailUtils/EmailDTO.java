@@ -1,4 +1,4 @@
-package com.example.marketingapplication.common.EmailUtils;
+package com.example.marketingapplication.common.emailutils;
 
 import lombok.Getter;
 import lombok.Setter;
